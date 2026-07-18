@@ -228,3 +228,43 @@ function hitungJarak(lat1, lon1, lat2, lon2){
     return R*c;
 
 }
+
+btnAbsen.addEventListener("click", kirimAbsensi);
+
+function kirimAbsensi(){
+
+    if(fotoBase64==""){
+
+        alert("Silakan selfie terlebih dahulu.");
+
+        return;
+
+    }
+
+    const data = {
+
+        nama : localStorage.getItem("nama"),
+        divisi : localStorage.getItem("divisi"),
+        jenis : localStorage.getItem("jenis"),
+
+        statusLokasi : statusLokasi,
+
+        jarak : jarakSPPG,
+
+        radius : RADIUS_SPPG,
+
+        foto : fotoBase64
+
+    };
+
+    google.script.run
+
+        .withSuccessHandler(function(){
+
+            alert("Absensi berhasil.");
+
+        })
+
+        .simpanAbsensi(data);
+
+}
