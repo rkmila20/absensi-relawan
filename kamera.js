@@ -113,7 +113,7 @@ btnUlang.addEventListener("click", ()=>{
  ************************************************/
 
 function ambilGPS() {
-
+console.log("Mulai mengambil GPS...");
     lokasi.innerHTML = "Mengambil lokasi...";
 
     if (!navigator.geolocation) {
@@ -138,12 +138,14 @@ function ambilGPS() {
 
         },
 
-        function(error){
+       function(error){
 
-            lokasi.innerHTML =
-                "GPS gagal : " + error.message;
+    console.error(error);
 
-        },
+    lokasi.innerHTML =
+        "GPS gagal (" + error.code + ") : " + error.message;
+
+},
 
         {
             enableHighAccuracy:true,
