@@ -17,7 +17,7 @@ const lokasi = document.getElementById("lokasi");
 
 let latitude = "";
 let longitude = "";
-
+let alamat = "";
 let stream = null;
 
 /************************************************
@@ -130,7 +130,7 @@ console.log("Mulai mengambil GPS...");
 
             latitude = pos.coords.latitude;
             longitude = pos.coords.longitude;
-
+cariAlamat(latitude, longitude);
             lokasi.innerHTML =
                 "Latitude : " + latitude +
                 "<br>" +
@@ -152,6 +152,45 @@ console.log("Mulai mengambil GPS...");
             timeout:10000,
             maximumAge:0
         }
+        /************************************************
+ * CARI ALAMAT DARI KOORDINAT
+ ************************************************/
+async function cariAlamat(lat, lng) {
+
+    try {
+
+        lokasi.innerHTML = "Mencari alamat...";
+
+        const url =
+            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+
+        const response = await fetch(url);
+
+        const data = await response.json();
+
+        alamat = data.display_name || "Alamat tidak ditemukan";
+
+        lokasi.innerHTML = `
+            <strong>Alamat:</strong><br>
+            ${alamat}
+            <hr>
+            <strong>Latitude:</strong> ${lat}<br>
+            <strong>Longitude:</strong> ${lng}
+        `;
+
+    } catch (err) {
+
+        console.error(err);
+
+        lokasi.innerHTML = `
+            Latitude : ${lat}<br>
+            Longitude : ${lng}<br><br>
+            Gagal mengambil alamat.
+        `;
+
+    }
+
+}
 
     );
 
