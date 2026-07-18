@@ -123,104 +123,64 @@ btnUlang.addEventListener("click", ()=>{
  ************************************************/
 
 function ambilGPS() {
-console.log("Mulai mengambil GPS...");
+
     lokasi.innerHTML = "Mengambil lokasi...";
 
     if (!navigator.geolocation) {
-
         lokasi.innerHTML = "Browser tidak mendukung GPS.";
-
         return;
-
     }
 
     navigator.geolocation.getCurrentPosition(
 
         function(pos){
 
-    jarakSPPG = hitungJarak(
-    latitude,
-    longitude,
-    LAT_SPPG,
-    LNG_SPPG
-);
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
 
-jarakSPPG = Math.round(jarakSPPG);
+            jarakSPPG = hitungJarak(
+                latitude,
+                longitude,
+                LAT_SPPG,
+                LNG_SPPG
+            );
 
-if(jarakSPPG <= RADIUS_SPPG){
+            jarakSPPG = Math.round(jarakSPPG);
 
-    statusLokasi = "Lokasi sesuai";
+            if (jarakSPPG <= RADIUS_SPPG) {
 
-}else{
+                statusLokasi = "🟢 Lokasi sesuai";
 
-    statusLokasi = "Lokasi berada di luar radius SPPG";
+            } else {
 
-}
+                statusLokasi = "🟡 Lokasi berada di luar radius SPPG";
 
-lokasi.innerHTML = `
-📍 <b>Status Lokasi</b><br><br>
+            }
 
-${statusLokasi}<br><br>
+            lokasi.innerHTML = `
+                <b>📍 Status Lokasi</b><br><br>
 
-Jarak Anda : <b>${jarakSPPG} meter</b><br>
-Radius SPPG : <b>${RADIUS_SPPG} meter</b>
-`;
+                ${statusLokasi}<br><br>
 
-    cariAlamat(latitude, longitude);
+                Jarak Anda : <b>${jarakSPPG} meter</b><br>
+                Radius SPPG : <b>${RADIUS_SPPG} meter</b>
+            `;
 
-},
+        },
 
-       function(error){
+        function(error){
 
-    console.error(error);
+            lokasi.innerHTML = "GPS gagal : " + error.message;
 
-    lokasi.innerHTML =
-        "GPS gagal (" + error.code + ") : " + error.message;
-
-},
+        },
 
         {
-            enableHighAccuracy:true,
-            timeout:10000,
-            maximumAge:0
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0
         }
-        /************************************************
- * CARI ALAMAT DARI KOORDINAT
- ************************************************/
-async function cariAlamat(lat, lng) {
 
-    try {
-
-        lokasi.innerHTML = "Mencari alamat...";
-
-        const url =
-            `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
-
-        const response = await fetch(url);
-
-        const data = await response.json();
-
-        alamat = data.display_name || "Alamat tidak ditemukan";
-
-        lokasi.innerHTML = `
-            <strong>Alamat:</strong><br>
-            ${alamat}
-            <hr>
-            <strong>Latitude:</strong> ${lat}<br>
-            <strong>Longitude:</strong> ${lng}
-        `;
-
-    } catch (err) {
-
-        console.error(err);
-
-        lokasi.innerHTML = `
-            Latitude : ${lat}<br>
-            Longitude : ${lng}<br><br>
-            Gagal mengambil alamat.
-        `;
-
-    }
+    );
 
 }
     /************************************************
