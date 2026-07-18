@@ -145,36 +145,26 @@ async function loadRelawan(namaDivisi){
 btnLanjut.addEventListener("click",()=>{
 
     if(divisi.value==""){
-
         alert("Silakan pilih divisi.");
-
         return;
-
     }
 
     if(relawan.value==""){
-
         alert("Silakan pilih nama relawan.");
-
         return;
-
     }
 
     if(jenis.value==""){
-
         alert("Silakan pilih jenis absen.");
-
         return;
-
     }
 
-    // sementara
-    alert(
-        "Data valid.\n\n" +
-        "Divisi : " + divisi.value +
-        "\nRelawan : " + relawan.value +
-        "\nJenis : " + jenis.value +
-        "\n\nTahap berikutnya: Kamera."
-    );
+    // Simpan data sementara
+    sessionStorage.setItem("divisi", divisi.value);
+    sessionStorage.setItem("relawan", relawan.value);
+    sessionStorage.setItem("jenis", jenis.value);
+
+    // Pindah ke halaman kamera
+    window.location.href = "kamera.html";
 
 });
