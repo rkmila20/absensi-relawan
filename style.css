@@ -153,3 +153,13 @@ button{
 }
 
 }
+button:disabled{
+    background:#bdbdbd;
+    color:#666;
+    cursor:not-allowed;
+    opacity:0.7;
+}
+
+button:not(:disabled){
+    cursor:pointer;
+}
