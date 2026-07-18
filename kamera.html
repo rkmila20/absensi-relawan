@@ -1,1 +1,64 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Selfie Absensi</title>
+
+<link rel="stylesheet" href="kamera.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>SELFIE ABSENSI</h1>
+
+        <video id="video" autoplay playsinline></video>
+
+        <canvas id="canvas" style="display:none;"></canvas>
+
+        <img id="preview" style="display:none;">
+
+        <button id="btnBuka">
+            📷 Buka Kamera
+        </button>
+
+        <button id="btnFoto">
+            📸 Ambil Foto
+        </button>
+
+        <button id="btnUlang" style="display:none;">
+            🔄 Ulangi
+        </button>
+
+        <div class="gps">
+
+            <h3>Lokasi</h3>
+
+            <p id="lokasi">
+                Menunggu GPS...
+            </p>
+
+        </div>
+
+        <button id="btnAbsen">
+
+            ✅ ABSEN
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="kamera.js"></script>
+
+</body>
+</html>
