@@ -128,15 +128,12 @@ console.log("Mulai mengambil GPS...");
 
         function(pos){
 
-            latitude = pos.coords.latitude;
-            longitude = pos.coords.longitude;
-cariAlamat(latitude, longitude);
-            lokasi.innerHTML =
-                "Latitude : " + latitude +
-                "<br>" +
-                "Longitude : " + longitude;
+    latitude = pos.coords.latitude;
+    longitude = pos.coords.longitude;
 
-        },
+    cariAlamat(latitude, longitude);
+
+},
 
        function(error){
 
