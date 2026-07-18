@@ -11,6 +11,16 @@ const relawan = document.getElementById("relawan");
 const jenis = document.getElementById("jenis");
 const btnLanjut = document.getElementById("btnLanjut");
 
+function cekForm() {
+
+    const lengkap =
+        divisi.value !== "" &&
+        relawan.value !== "" &&
+        jenis.value !== "";
+
+    btnLanjut.disabled = !lengkap;
+
+}
 /************************************************
  * LOAD DIVISI
  ************************************************/
@@ -73,16 +83,18 @@ divisi.addEventListener("change",()=>{
     if(divisi.value==""){
 
         relawan.innerHTML="<option>Pilih Divisi dahulu</option>";
-
+        cekForm();
         return;
 
     }
 
     loadRelawan(divisi.value);
+    cekForm();
 
 });
 
-
+relawan.addEventListener("change", cekForm);
+jenis.addEventListener("change", cekForm);
 /************************************************
  * Ambil Relawan
  ************************************************/
@@ -126,7 +138,7 @@ async function loadRelawan(namaDivisi){
             relawan.appendChild(option);
 
         });
-
+    cekForm();
     }catch(err){
 
         alert("Gagal mengambil relawan");
