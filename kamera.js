@@ -268,3 +268,83 @@ function kirimAbsensi(){
         .simpanAbsensi(data);
 
 }
+// ===============================
+// KIRIM ABSENSI
+// ===============================
+
+btnAbsen.addEventListener("click", kirimAbsensi);
+
+async function kirimAbsensi(){
+
+    if(fotoBase64==""){
+
+        alert("Silakan ambil selfie terlebih dahulu.");
+
+        return;
+
+    }
+
+    const data={
+
+        nama:sessionStorage.getItem("relawan"),
+
+        divisi:sessionStorage.getItem("divisi"),
+
+        jenis:sessionStorage.getItem("jenis"),
+
+        statusLokasi:statusLokasi,
+
+        jarak:jarakSPPG,
+
+        radius:RADIUS_SPPG,
+
+        foto:fotoBase64
+
+    };
+
+    btnAbsen.disabled=true;
+    btnAbsen.innerHTML="Mengirim...";
+
+    try{
+
+        const response=await fetch(
+            "https://script.google.com/macros/s/AKfycbwmWULLU8GirkYhRUiflrqgxfUM5fHhxTm_sm-VbgXtmwcg6YX35ZTHC0g59rzsE0pj8Q/exec",
+        {
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(data)
+
+        });
+
+        const hasil=await response.json();
+
+        if(hasil.status=="success"){
+
+            alert("✅ Absensi berhasil");
+
+            sessionStorage.clear();
+
+            location.href="index.html";
+
+        }else{
+
+            alert("Gagal : "+hasil.pesan);
+
+        }
+
+    }catch(err){
+
+        alert("Gagal mengirim data.");
+
+        console.log(err);
+
+    }
+
+    btnAbsen.disabled=false;
+    btnAbsen.innerHTML="ABSEN";
+
+}
