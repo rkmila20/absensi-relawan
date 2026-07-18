@@ -14,7 +14,17 @@ const btnFoto = document.getElementById("btnFoto");
 const btnUlang = document.getElementById("btnUlang");
 
 const lokasi = document.getElementById("lokasi");
+/************************************************
+ * TITIK SPPG
+ ************************************************/
 
+const LAT_SPPG = -7.96190882762548;
+const LNG_SPPG = 112.71223884570689;
+
+const RADIUS_SPPG = 45; // meter
+
+let jarakSPPG = 0;
+let statusLokasi = "";
 let latitude = "";
 let longitude = "";
 let alamat = "";
@@ -128,8 +138,33 @@ console.log("Mulai mengambil GPS...");
 
         function(pos){
 
-    latitude = pos.coords.latitude;
-    longitude = pos.coords.longitude;
+    jarakSPPG = hitungJarak(
+    latitude,
+    longitude,
+    LAT_SPPG,
+    LNG_SPPG
+);
+
+jarakSPPG = Math.round(jarakSPPG);
+
+if(jarakSPPG <= RADIUS_SPPG){
+
+    statusLokasi = "Lokasi sesuai";
+
+}else{
+
+    statusLokasi = "Lokasi berada di luar radius SPPG";
+
+}
+
+lokasi.innerHTML = `
+📍 <b>Status Lokasi</b><br><br>
+
+${statusLokasi}<br><br>
+
+Jarak Anda : <b>${jarakSPPG} meter</b><br>
+Radius SPPG : <b>${RADIUS_SPPG} meter</b>
+`;
 
     cariAlamat(latitude, longitude);
 
@@ -186,6 +221,29 @@ async function cariAlamat(lat, lng) {
         `;
 
     }
+
+}
+    /************************************************
+ * HITUNG JARAK (HAVERSINE)
+ ************************************************/
+
+function hitungJarak(lat1, lon1, lat2, lon2){
+
+    const R = 6371000;
+
+    const dLat = (lat2-lat1) * Math.PI/180;
+    const dLon = (lon2-lon1) * Math.PI/180;
+
+    const a =
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1*Math.PI/180) *
+        Math.cos(lat2*Math.PI/180) *
+        Math.sin(dLon/2) *
+        Math.sin(dLon/2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    return R * c;
 
 }
 
