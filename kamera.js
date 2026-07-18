@@ -13,6 +13,11 @@ const preview = document.getElementById("preview");
 const btnFoto = document.getElementById("btnFoto");
 const btnUlang = document.getElementById("btnUlang");
 
+const lokasi = document.getElementById("lokasi");
+
+let latitude = "";
+let longitude = "";
+
 let stream = null;
 
 /************************************************
@@ -40,9 +45,11 @@ async function bukaKamera() {
 
         });
 
-        video.srcObject = stream;
+       video.srcObject = stream;
 
-        console.log("Kamera berhasil dibuka.");
+ambilGPS();
+
+console.log("Kamera berhasil dibuka.");
 
     } catch (err) {
 
@@ -100,3 +107,50 @@ btnUlang.addEventListener("click", ()=>{
     btnUlang.style.display = "none";
 
 });
+
+/************************************************
+ * GPS
+ ************************************************/
+
+function ambilGPS() {
+
+    lokasi.innerHTML = "Mengambil lokasi...";
+
+    if (!navigator.geolocation) {
+
+        lokasi.innerHTML = "Browser tidak mendukung GPS.";
+
+        return;
+
+    }
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(pos){
+
+            latitude = pos.coords.latitude;
+            longitude = pos.coords.longitude;
+
+            lokasi.innerHTML =
+                "Latitude : " + latitude +
+                "<br>" +
+                "Longitude : " + longitude;
+
+        },
+
+        function(error){
+
+            lokasi.innerHTML =
+                "GPS gagal : " + error.message;
+
+        },
+
+        {
+            enableHighAccuracy:true,
+            timeout:10000,
+            maximumAge:0
+        }
+
+    );
+
+}
