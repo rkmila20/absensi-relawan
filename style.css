@@ -151,7 +151,97 @@ button:not(:disabled){
         font-size:16px;
     }
 }
+/* ===== HEADER ===== */
 
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.datetime{
+    margin-top:15px;
+    color:#555;
+    font-size:15px;
+    line-height:1.7;
+}
+
+/* ===== CAMERA ===== */
+
+.camera-box{
+    width:100%;
+    background:#000;
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+#video{
+    width:100%;
+    display:block;
+}
+
+#preview{
+    width:100%;
+    border-radius:12px;
+    margin-top:15px;
+    border:3px solid #16A34A;
+}
+
+/* ===== INFO BOX ===== */
+
+.info-box{
+    background:#F8FAFC;
+    border-left:5px solid #2563EB;
+    padding:15px;
+    border-radius:10px;
+    margin-bottom:20px;
+    color:#333;
+    line-height:1.7;
+}
+
+/* ===== BUTTON ABSEN ===== */
+
+.btnAbsen{
+    background:#16A34A;
+    margin-top:15px;
+}
+
+.btnAbsen:hover{
+    background:#15803D;
+}
+
+/* ===== BUTTON RESET ===== */
+
+.btnReset{
+    background:#2563EB;
+    margin-top:15px;
+}
+
+.btnReset:hover{
+    background:#1D4ED8;
+}
+
+/* ===== WARNING ===== */
+
+.warning{
+    margin-top:25px;
+    padding:15px;
+    border-radius:10px;
+    background:#FFF8E1;
+    border-left:5px solid #F59E0B;
+    font-size:14px;
+    line-height:1.7;
+}
+
+/* ===== FOOTER ===== */
+
+.footer{
+    margin-top:30px;
+    text-align:center;
+    color:#777;
+    font-size:13px;
+    line-height:1.8;
+}
 /* Catatan:
    Ini adalah draft yang berasal dari CSS Anda saat ini.
    Berikutnya saya akan membuat versi FINAL dengan tampilan
