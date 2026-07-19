@@ -325,11 +325,12 @@ function suksesLokasi(pos){
     Math.round(jarakMeter) + " Meter";
 
 }
-function gagalLokasi(){
+function gagalLokasi(error){
+
+    console.log(error);
 
     document.getElementById("statusLokasi").innerHTML =
-    "GPS gagal diperoleh";
-
+        "GPS Gagal (" + error.code + ")";
 }
 function hitungJarak(lat1, lon1, lat2, lon2){
 
