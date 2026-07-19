@@ -163,3 +163,49 @@ button:disabled{
 button:not(:disabled){
     cursor:pointer;
 }
+
+/* ===== JENIS ABSEN ===== */
+
+.jenis-container{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+.btnJenis{
+
+    width:140px;
+    height:48px;
+
+    border:none;
+    border-radius:30px;
+
+    font-size:16px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:#E5E7EB;
+    color:#444;
+
+    transition:.25s;
+}
+
+.btnJenis:hover{
+    transform:translateY(-2px);
+}
+
+.btnJenis.active{
+    color:white;
+    transform:scale(1.05);
+}
+
+.btnJenis.datang.active{
+    background:#16A34A;
+}
+
+.btnJenis.pulang.active{
+    background:#2563EB;
+}
