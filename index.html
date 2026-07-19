@@ -1,77 +1,97 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Absensi Relawan SPPG</title>
-
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPPG Attendance System</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-    <!-- HEADER -->
+  <div class="card">
 
     <div class="header">
+      <h1>ABSENSI RELAWAN</h1>
+      <h2>SPPG Al-Ghozali Pakiskembar 2</h2>
 
-        
-        <h1>ABSENSI RELAWAN</h1>
-
-        <h2>SPPG AL-GHOZALI PAKISKEMBAR 2</h2>
-
-        <div id="tanggal"></div>
-
-        <div id="jam"></div>
-
+      <div class="datetime">
+        <div id="tanggal">Senin, 20 Juli 2026</div>
+        <div id="jam">08:00:00 WIB</div>
+      </div>
     </div>
 
-
-    <!-- CARD -->
-
-    <div class="card">
-
-        <!-- DIVISI -->
-
-        <label>
-            🏢 Divisi
-        </label>
-
-        <select id="divisi">
-            <option value="">Pilih Divisi</option>
-        </select>
-
-
-        <!-- RELAWAN -->
-
-        <label>
-            👤 Nama Relawan
-        </label>
-
-        <select id="relawan">
-            <option value="">Pilih Nama Relawan</option>
-        </select>
-
-
-        <!-- JENIS ABSEN -->
-
-       <label>📋 Jenis Absen</label>
-
-<div class="jenis-container">
-
-    <button type="button" id="btnDatang" class="btnJenis datang">
-        ↘️ DATANG
-    </button>
-
-    <button type="button" id="btnPulang" class="btnJenis pulang">
-        ↗️ PULANG
-    </button>
-
-</div>
-
+    <div class="form-group">
+      <label>🏢 Divisi</label>
+      <select id="divisi">
+        <option value="">Pilih Divisi</option>
+      </select>
     </div>
+
+    <div class="form-group">
+      <label>👤 Nama Relawan</label>
+      <select id="relawan">
+        <option value="">Pilih Nama Relawan</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>📋 Jenis Absen</label>
+
+      <div class="jenis-container">
+        <button type="button" id="btnDatang" class="btnJenis datang">↘️ DATANG</button>
+        <button type="button" id="btnPulang" class="btnJenis pulang">↗️ PULANG</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>📷 Kamera Selfie</label>
+
+      <div class="camera-box">
+        <video id="video" autoplay playsinline></video>
+      </div>
+
+      <button type="button" id="btnSelfie" class="btnAbsen">
+        📸 Ambil Selfie
+      </button>
+
+      <canvas id="canvas" style="display:none;"></canvas>
+
+      <img id="preview" style="display:none;width:100%;margin-top:15px;border-radius:12px;">
+    </div>
+
+    <div class="info-box">
+      <strong>📍 Status Lokasi</strong>
+      <div id="statusLokasi">Menunggu GPS...</div>
+
+      <br>
+
+      <strong>📏 Jarak</strong>
+      <div id="jarak">-</div>
+    </div>
+
+    <button id="btnAbsen" class="btnAbsen">
+      ✅ ABSEN SEKARANG
+    </button>
+
+    <button id="btnReset" class="btnReset" style="display:none;">
+      🔄 ABSEN LAGI
+    </button>
+
+    <div class="warning">
+      <strong>⚠️ PERHATIAN</strong><br><br>
+      Pastikan yang bersangkutan benar-benar berada di lokasi.<br>
+      Kehadiran dibuktikan dengan foto selfie saat absensi.
+    </div>
+
+    <div class="footer">
+      <strong>SPPG Attendance System</strong><br>
+      Version 1.0.0<br>
+      © 2026 Kloso.id Project
+    </div>
+
+  </div>
 
 </div>
 
