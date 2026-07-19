@@ -487,3 +487,43 @@ btnReset.onclick = function () {
     ambilLokasi();
 
 };
+btnReset.addEventListener("click", function () {
+
+    // Reset pilihan divisi
+    divisi.selectedIndex = 0;
+
+    // Kosongkan daftar relawan
+    relawan.innerHTML = '<option value="">-- Pilih Relawan --</option>';
+
+    // Reset jenis absen
+    jenisAbsen = "";
+    btnDatang.classList.remove("active");
+    btnPulang.classList.remove("active");
+
+    // Reset foto
+    fotoBase64 = "";
+
+    // Bersihkan preview
+    preview.src = "";
+    preview.style.display = "none";
+
+    // Tampilkan kamera lagi
+    video.style.display = "block";
+
+    // Sembunyikan tombol reset
+    btnReset.style.display = "none";
+
+    // Aktifkan tombol absen
+    btnAbsen.disabled = false;
+    btnAbsen.innerHTML = "✅ ABSEN SEKARANG";
+
+    // Buka kamera lagi
+    bukaKamera();
+
+    // Ambil GPS lagi
+    ambilLokasi();
+
+    // Muat ulang daftar divisi
+    loadDivisi();
+
+});
