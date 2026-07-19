@@ -1,6 +1,6 @@
 /* =====================================================
    SPPG ATTENDANCE SYSTEM
-   style.css (Draft)
+   style.css
    Version : 1.0.0
    © 2026 Kloso.id Project
 ===================================================== */
@@ -9,115 +9,110 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:"Poppins",Arial,sans-serif;
 }
 
 body{
-    background:#f2f5f9;
+    background:#0B5ED7;
+    min-height:100vh;
     display:flex;
     justify-content:center;
-    align-items:center;
-    min-height:100vh;
+    align-items:flex-start;
     padding:20px;
 }
 
 .container{
     width:100%;
-    max-width:450px;
+    max-width:520px;
 }
 
 .card{
-    background:#ffffff;
-    border-radius:15px;
-    padding:30px;
-    box-shadow:0 8px 25px rgba(0,0,0,.15);
+    background:#fff;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 12px 30px rgba(0,0,0,.18);
 }
 
-h1{
+.header{
     text-align:center;
-    color:#0D47A1;
+    margin-bottom:24px;
+}
+
+.header h1{
+    color:#0B5ED7;
     font-size:28px;
+    margin-bottom:6px;
 }
 
-h2{
-    text-align:center;
+.header h2{
     color:#666;
+    font-size:16px;
+    font-weight:500;
+    margin-bottom:18px;
+}
+
+.datetime{
+    background:#0B5ED7;
+    color:#fff;
+    border-radius:14px;
+    padding:14px;
+}
+
+#tanggal{
     font-size:15px;
-    margin-top:5px;
-    margin-bottom:30px;
+    margin-bottom:8px;
+}
+
+#jam{
+    font-size:30px;
+    font-weight:700;
+    letter-spacing:1px;
 }
 
 .form-group{
-    margin-bottom:20px;
+    margin-top:18px;
 }
 
 label{
     display:block;
-    margin-bottom:8px;
-    font-weight:bold;
+    font-weight:600;
     color:#333;
+    margin-bottom:8px;
 }
 
 select{
     width:100%;
-    padding:12px;
-    border-radius:8px;
-    border:1px solid #ccc;
-    font-size:16px;
-    background:white;
+    height:48px;
+    border:1px solid #d6d6d6;
+    border-radius:12px;
+    padding:0 14px;
+    font-size:15px;
+    outline:none;
+    transition:.2s;
 }
 
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    background:#1565C0;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
+select:focus{
+    border-color:#0B5ED7;
+    box-shadow:0 0 0 3px rgba(11,94,215,.15);
 }
-
-button:hover{
-    background:#0D47A1;
-}
-
-button:active{
-    transform:scale(.98);
-}
-
-button:disabled{
-    background:#bdbdbd;
-    color:#666;
-    cursor:not-allowed;
-    opacity:0.7;
-}
-
-button:not(:disabled){
-    cursor:pointer;
-}
-
-/* ===== JENIS ABSEN ===== */
 
 .jenis-container{
     display:flex;
     justify-content:center;
     gap:12px;
-    margin-top:10px;
-    margin-bottom:20px;
+    margin:14px 0 22px;
 }
 
 .btnJenis{
-    width:140px;
-    height:48px;
+    width:135px;
+    height:46px;
     border:none;
     border-radius:30px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
     background:#E5E7EB;
     color:#444;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
     transition:.25s;
 }
 
@@ -126,7 +121,7 @@ button:not(:disabled){
 }
 
 .btnJenis.active{
-    color:white;
+    color:#fff;
     transform:scale(1.05);
 }
 
@@ -138,22 +133,90 @@ button:not(:disabled){
     background:#2563EB;
 }
 
-@media(max-width:480px){
-    .card{
-        padding:20px;
-    }
-
-    h1{
-        font-size:23px;
-    }
-
-    button{
-        font-size:16px;
-    }
+.camera-box{
+    width:100%;
+    aspect-ratio:4/3;
+    background:#f4f4f4;
+    border:2px dashed #cfd8dc;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    margin-top:10px;
 }
 
-/* Catatan:
-   Ini adalah draft yang berasal dari CSS Anda saat ini.
-   Berikutnya saya akan membuat versi FINAL dengan tampilan
-   modern (header baru, jam digital, kamera, GPS, footer, dsb).
-*/
+.camera-box video,
+.camera-box img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.info-box{
+    background:#f8f9fa;
+    border-left:5px solid #0B5ED7;
+    border-radius:10px;
+    padding:12px;
+    margin-top:18px;
+}
+
+.btnAbsen{
+    width:100%;
+    margin-top:22px;
+    height:52px;
+    border:none;
+    border-radius:14px;
+    background:#16A34A;
+    color:#fff;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btnAbsen:hover{
+    filter:brightness(.95);
+}
+
+.btnReset{
+    width:100%;
+    margin-top:12px;
+    height:48px;
+    border:none;
+    border-radius:12px;
+    background:#2563EB;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.warning{
+    margin-top:20px;
+    background:#FFF8E1;
+    border-left:5px solid #FFC107;
+    border-radius:10px;
+    padding:14px;
+    color:#5f4b00;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.footer{
+    text-align:center;
+    margin-top:24px;
+    color:#666;
+    font-size:13px;
+    line-height:1.8;
+}
+
+@media (max-width:480px){
+    body{padding:12px;}
+    .card{padding:18px;}
+    .header h1{font-size:24px;}
+    #jam{font-size:26px;}
+    .btnJenis{
+        width:125px;
+        font-size:14px;
+    }
+}
