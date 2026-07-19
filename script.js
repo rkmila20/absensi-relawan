@@ -21,7 +21,7 @@ const btnAbsen = document.getElementById("btnAbsen");
 btnAbsen.addEventListener("click", kirimAbsen);
 
 async function kirimAbsen() {
-
+ alert("Tombol ABSEN diklik");
     if (!fotoBase64) {
         alert("Silakan ambil selfie terlebih dahulu.");
         return;
