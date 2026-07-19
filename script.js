@@ -6,7 +6,7 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwmWULLU8GirkYhRUiflrqgxfUM5fHhxTm_sm-VbgXtmwcg6YX35ZTHC0g59rzsE0pj8Q/exec";
 
-cconst divisi = document.getElementById("divisi");
+const divisi = document.getElementById("divisi");
 const relawan = document.getElementById("relawan");
 
 const btnDatang = document.getElementById("btnDatang");
@@ -51,6 +51,7 @@ btnPulang.onclick = () => {
 window.onload = () => {
 
     loadDivisi();
+    bukaKamera();
 
 };
 
@@ -203,7 +204,55 @@ function updateJam() {
     document.getElementById("jam").innerHTML = jam;
 
 }
+/************************************************
+ * KAMERA
+ ************************************************/
 
+async function bukaKamera(){
+
+    try{
+
+        stream = await navigator.mediaDevices.getUserMedia({
+
+            video:{
+                facingMode:"user"
+            },
+
+            audio:false
+
+        });
+
+        video.srcObject = stream;
+        await video.play();
+
+    }catch(err){
+
+        alert("Kamera tidak dapat dibuka.");
+
+        console.log(err);
+
+    }
+
+}
+/************************************************
+ * AMBIL SELFIE
+ ************************************************/
+
+btnSelfie.onclick = function(){
+
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    ctx.drawImage(video,0,0);
+
+    fotoBase64 = canvas.toDataURL("image/jpeg",0.8);
+
+    preview.src = fotoBase64;
+    preview.style.display = "block";
+
+};
 setInterval(updateJam,1000);
 
 updateJam();
