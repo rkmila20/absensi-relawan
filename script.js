@@ -161,3 +161,39 @@ async function loadRelawan(namaDivisi){
 }
 
 
+/************************************************
+ * JAM & TANGGAL
+ ************************************************/
+
+function updateJam() {
+
+    const sekarang = new Date();
+
+    const hari = [
+        "Minggu","Senin","Selasa","Rabu",
+        "Kamis","Jumat","Sabtu"
+    ];
+
+    const bulan = [
+        "Januari","Februari","Maret","April",
+        "Mei","Juni","Juli","Agustus",
+        "September","Oktober","November","Desember"
+    ];
+
+    const tanggal =
+        hari[sekarang.getDay()] + ", " +
+        sekarang.getDate() + " " +
+        bulan[sekarang.getMonth()] + " " +
+        sekarang.getFullYear();
+
+    const jam =
+        sekarang.toLocaleTimeString("id-ID") + " WIB";
+
+    document.getElementById("tanggal").innerHTML = tanggal;
+    document.getElementById("jam").innerHTML = jam;
+
+}
+
+setInterval(updateJam,1000);
+
+updateJam();
