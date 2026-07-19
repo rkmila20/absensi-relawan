@@ -37,12 +37,12 @@ async function kirimAbsen() {
         foto: fotoBase64
     };
 
-    try {
+   try {
 
     btnAbsen.disabled = true;
     btnAbsen.innerHTML = "⏳ Mengirim...";
 
-    const response = await const formData = new FormData();
+    const formData = new FormData();
 
     formData.append("nama", relawan.value);
     formData.append("divisi", divisi.value);
@@ -52,10 +52,20 @@ async function kirimAbsen() {
     formData.append("radius", RADIUS);
     formData.append("foto", fotoBase64);
 
-    fetch(API_URL,{
-        method:"POST",
-        body:formData
+    const response = await fetch(API_URL, {
+        method: "POST",
+        body: formData
     });
+
+    alert("✅ Data berhasil dikirim.");
+
+    btnReset.style.display = "block";
+
+} catch (err) {
+
+    alert("Terjadi kesalahan : " + err);
+
+}
 
     alert("✅ Data berhasil dikirim.");
 
