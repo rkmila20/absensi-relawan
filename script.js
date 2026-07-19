@@ -330,7 +330,7 @@ function suksesLokasi(pos){
             </span>
         `;
 
-        btnAbsen.disabled = false;
+       // btnAbsen.disabled = false; *aktifkan jika ingin
 
     }else{
 
@@ -356,7 +356,7 @@ function suksesLokasi(pos){
             </span>
         `;
 
-        btnAbsen.disabled = true;
+      //  btnAbsen.disabled = true;
 
     }
 
