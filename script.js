@@ -27,57 +27,46 @@ async function kirimAbsen() {
         return;
     }
 
-    const data = {
-        nama: relawan.value,
-        divisi: divisi.value,
-        jenis: jenisAbsen,
-        statusLokasi: statusLokasi,
-        jarak: Math.round(jarakMeter),
-        radius: RADIUS,
-        foto: fotoBase64
-    };
-
-   try {
+    if (!jenisAbsen) {
+        alert("Silakan pilih Jenis Absen.");
+        return;
+    }
 
     btnAbsen.disabled = true;
     btnAbsen.innerHTML = "⏳ Mengirim...";
 
-    const formData = new FormData();
+    try {
 
-    formData.append("nama", relawan.value);
-    formData.append("divisi", divisi.value);
-    formData.append("jenis", jenisAbsen);
-    formData.append("statusLokasi", statusLokasi);
-    formData.append("jarak", Math.round(jarakMeter));
-    formData.append("radius", RADIUS);
-    formData.append("foto", fotoBase64);
+        const formData = new FormData();
 
-    const response = await fetch(API_URL, {
-        method: "POST",
-        body: formData
-    });
+        formData.append("nama", relawan.value);
+        formData.append("divisi", divisi.value);
+        formData.append("jenis", jenisAbsen);
+        formData.append("statusLokasi", statusLokasi);
+        formData.append("jarak", Math.round(jarakMeter));
+        formData.append("radius", RADIUS);
+        formData.append("foto", fotoBase64);
 
-    alert("✅ Data berhasil dikirim.");
+        const response = await fetch(API_URL, {
+            method: "POST",
+            body: formData
+        });
 
-    btnReset.style.display = "block";
+        alert("✅ Data berhasil dikirim.");
 
-} catch (err) {
+        btnReset.style.display = "block";
 
-    alert("Terjadi kesalahan : " + err);
+    } catch (err) {
 
-}
-
-    alert("✅ Data berhasil dikirim.");
-
-    btnReset.style.display = "block";
-
-} catch (err) {
+        console.error(err);
         alert("Terjadi kesalahan : " + err);
 
-    }
+    } finally {
 
-    btnAbsen.disabled = false;
-    btnAbsen.innerHTML = "✅ ABSEN SEKARANG";
+        btnAbsen.disabled = false;
+        btnAbsen.innerHTML = "✅ ABSEN SEKARANG";
+
+    }
 
 }
 
