@@ -308,21 +308,57 @@ function suksesLokasi(pos){
         longitude
     );
 
-    if(jarakMeter <= RADIUS){
+    const jarak = Math.round(jarakMeter);
 
-        statusLokasi = "🟢 Dalam Radius";
+    if(jarak <= RADIUS){
+
+        statusLokasi = "DALAM RADIUS";
+
+        document.getElementById("statusLokasi").innerHTML = `
+            <span style="color:#16A34A;font-weight:bold;font-size:18px;">
+                ✅ ANDA BERADA DI DALAM RADIUS SPPG
+            </span>
+        `;
+
+        document.getElementById("jarak").innerHTML = `
+            <b>📏 Radius Maksimal :</b> ${RADIUS} Meter
+            <br>
+            <b>📍 Jarak Anda :</b> ${jarak} Meter
+            <br><br>
+            <span style="color:#16A34A;font-weight:bold;">
+                ✅ TERIMA KASIH LOKASI SESUAI
+            </span>
+        `;
+
+        btnAbsen.disabled = false;
 
     }else{
 
-        statusLokasi = "🔴 Di Luar Radius";
+        const selisih = jarak - RADIUS;
+
+        statusLokasi = "LUAR RADIUS";
+
+        document.getElementById("statusLokasi").innerHTML = `
+            <span style="color:#DC2626;font-weight:bold;font-size:18px;">
+                ❌ ANDA BERADA DI LUAR RADIUS SPPG
+            </span>
+        `;
+
+        document.getElementById("jarak").innerHTML = `
+            <b>📏 Radius Maksimal :</b> ${RADIUS} Meter
+            <br>
+            <b>📍 Jarak Anda :</b> ${jarak} Meter
+            <br>
+            <b>🚶 Di luar Radius :</b> ${selisih} Meter
+            <br><br>
+            <span style="color:#DC2626;font-weight:bold;">
+                ❌ MOHON SEGERA MENDEKAT KE SPPG
+            </span>
+        `;
+
+        btnAbsen.disabled = true;
 
     }
-
-    document.getElementById("statusLokasi").innerHTML =
-    statusLokasi;
-
-    document.getElementById("jarak").innerHTML =
-    Math.round(jarakMeter) + " Meter";
 
 }
 function gagalLokasi(error){
