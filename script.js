@@ -11,6 +11,29 @@ const relawan = document.getElementById("relawan");
 const jenis = document.getElementById("jenis");
 const btnLanjut = document.getElementById("btnLanjut");
 
+const btnDatang = document.getElementById("btnDatang");
+const btnPulang = document.getElementById("btnPulang");
+
+let jenisAbsen = "";
+
+btnDatang.onclick = () => {
+
+    jenisAbsen = "DATANG";
+
+    btnDatang.classList.add("active");
+    btnPulang.classList.remove("active");
+
+}
+
+btnPulang.onclick = () => {
+
+    jenisAbsen = "PULANG";
+
+    btnPulang.classList.add("active");
+    btnDatang.classList.remove("active");
+
+}
+
 function cekForm() {
 
     const lengkap =
