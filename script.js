@@ -456,3 +456,34 @@ function hitungJarak(lat1, lon1, lat2, lon2){
     return R*c;
 
 }
+btnReset.onclick = function () {
+
+    // Kosongkan pilihan
+    divisi.selectedIndex = 0;
+    relawan.innerHTML = '<option value="">Pilih Nama</option>';
+
+    // Reset jenis absen
+    jenisAbsen = "";
+    btnDatang.classList.remove("active");
+    btnPulang.classList.remove("active");
+
+    // Hapus foto
+    fotoBase64 = "";
+
+    // Kosongkan preview foto
+    preview.src = "";
+    preview.style.display = "none";
+
+    // Tampilkan kembali kamera
+    video.style.display = "block";
+
+    // Sembunyikan tombol Absen Kembali
+    btnReset.style.display = "none";
+
+    // Aktifkan kamera lagi
+    bukaKamera();
+
+    // Ambil lokasi lagi
+    ambilLokasi();
+
+};
