@@ -21,7 +21,7 @@ const btnAbsen = document.getElementById("btnAbsen");
 btnAbsen.addEventListener("click", kirimAbsen);
 
 async function kirimAbsen() {
- alert("Tombol ABSEN diklik");
+
     if (!fotoBase64) {
         alert("Silakan ambil selfie terlebih dahulu.");
         return;
@@ -44,25 +44,13 @@ async function kirimAbsen() {
 
         const response = await fetch(API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            mode: "no-cors",
             body: JSON.stringify(data)
         });
 
-        const hasil = await response.json();
+        alert("✅ Data berhasil dikirim.");
 
-        if (hasil.status == "success") {
-
-            alert("✅ Absensi berhasil disimpan.");
-
-            btnReset.style.display = "block";
-
-        } else {
-
-            alert("❌ " + hasil.pesan);
-
-        }
+        btnReset.style.display = "block";
 
     } catch (err) {
 
@@ -73,6 +61,7 @@ async function kirimAbsen() {
     btnAbsen.disabled = false;
     btnAbsen.innerHTML = "✅ ABSEN SEKARANG";
 
+}
 }
 const btnReset = document.getElementById("btnReset");
 
