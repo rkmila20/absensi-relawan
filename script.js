@@ -52,16 +52,19 @@ async function kirimAbsen() {
     body: formData
 });
 
-const hasil = await response.text();
+const hasil = await response.json();
 
-console.log("Status :", response.status);
-console.log("Response :", hasil);
+console.log(hasil);
 
-if (!response.ok) {
-    throw new Error("Server mengembalikan status " + response.status);
+if (hasil.status === "success") {
+
+    alert("✅ Absen diterima.\n\nSemangat bekerja!");
+
+} else {
+
+    alert("❌ " + hasil.pesan);
+
 }
-
-alert("✅ " + hasil);
 
         btnReset.style.display = "block";
 
