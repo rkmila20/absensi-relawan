@@ -6,12 +6,22 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbwmWULLU8GirkYhRUiflrqgxfUM5fHhxTm_sm-VbgXtmwcg6YX35ZTHC0g59rzsE0pj8Q/exec";
 
-const divisi = document.getElementById("divisi");
+cconst divisi = document.getElementById("divisi");
 const relawan = document.getElementById("relawan");
-
 
 const btnDatang = document.getElementById("btnDatang");
 const btnPulang = document.getElementById("btnPulang");
+
+const video = document.getElementById("video");
+const canvas = document.getElementById("canvas");
+const preview = document.getElementById("preview");
+
+const btnSelfie = document.getElementById("btnSelfie");
+const btnAbsen = document.getElementById("btnAbsen");
+const btnReset = document.getElementById("btnReset");
+
+let stream = null;
+let fotoBase64 = "";
 
 let jenisAbsen = "";
 
