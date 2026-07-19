@@ -527,3 +527,5 @@ btnReset.addEventListener("click", function () {
     loadDivisi();
 
 });
+
+btnReset.onclick = () => location.reload();
