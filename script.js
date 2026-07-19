@@ -8,8 +8,7 @@ const API_URL =
 
 const divisi = document.getElementById("divisi");
 const relawan = document.getElementById("relawan");
-const jenis = document.getElementById("jenis");
-const btnLanjut = document.getElementById("btnLanjut");
+
 
 const btnDatang = document.getElementById("btnDatang");
 const btnPulang = document.getElementById("btnPulang");
@@ -34,16 +33,7 @@ btnPulang.onclick = () => {
 
 }
 
-function cekForm() {
 
-    const lengkap =
-        divisi.value !== "" &&
-        relawan.value !== "" &&
-        jenis.value !== "";
-
-    btnLanjut.disabled = !lengkap;
-
-}
 /************************************************
  * LOAD DIVISI
  ************************************************/
@@ -106,18 +96,16 @@ divisi.addEventListener("change",()=>{
     if(divisi.value==""){
 
         relawan.innerHTML="<option>Pilih Divisi dahulu</option>";
-        cekForm();
+      // tidak perlu apa-apa
         return;
 
     }
 
     loadRelawan(divisi.value);
-    cekForm();
-
+ 
 });
 
-relawan.addEventListener("change", cekForm);
-jenis.addEventListener("change", cekForm);
+
 /************************************************
  * Ambil Relawan
  ************************************************/
@@ -161,7 +149,7 @@ async function loadRelawan(namaDivisi){
             relawan.appendChild(option);
 
         });
-    cekForm();
+  
     }catch(err){
 
         alert("Gagal mengambil relawan");
@@ -173,33 +161,3 @@ async function loadRelawan(namaDivisi){
 }
 
 
-/************************************************
- * Tombol Lanjut
- ************************************************/
-
-btnLanjut.addEventListener("click",()=>{
-
-    if(divisi.value==""){
-        alert("Silakan pilih divisi.");
-        return;
-    }
-
-    if(relawan.value==""){
-        alert("Silakan pilih nama relawan.");
-        return;
-    }
-
-    if(jenis.value==""){
-        alert("Silakan pilih jenis absen.");
-        return;
-    }
-
-    // Simpan data sementara
-    sessionStorage.setItem("divisi", divisi.value);
-    sessionStorage.setItem("relawan", relawan.value);
-    sessionStorage.setItem("jenis", jenis.value);
-
-    // Pindah ke halaman kamera
-    window.location.href = "kamera.html";
-
-});
