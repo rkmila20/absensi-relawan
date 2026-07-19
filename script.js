@@ -42,11 +42,20 @@ async function kirimAbsen() {
         btnAbsen.disabled = true;
         btnAbsen.innerHTML = "⏳ Mengirim...";
 
-        const response = await fetch(API_URL, {
-            method: "POST",
-            mode: "no-cors",
-            body: JSON.stringify(data)
-        });
+        const response = await const formData = new FormData();
+
+formData.append("nama", relawan.value);
+formData.append("divisi", divisi.value);
+formData.append("jenis", jenisAbsen);
+formData.append("statusLokasi", statusLokasi);
+formData.append("jarak", Math.round(jarakMeter));
+formData.append("radius", RADIUS);
+formData.append("foto", fotoBase64);
+
+fetch(API_URL,{
+    method:"POST",
+    body:formData
+});
 
         alert("✅ Data berhasil dikirim.");
 
