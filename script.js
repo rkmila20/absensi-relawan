@@ -327,7 +327,7 @@ function suksesLokasi(pos){
 }
 function gagalLokasi(error){
 
-    console.log(error);
+    console.error("GPS Error:", error);
 
     document.getElementById("statusLokasi").innerHTML =
         "GPS Gagal (" + error.code + ")";
