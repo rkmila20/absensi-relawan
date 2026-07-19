@@ -39,30 +39,29 @@ async function kirimAbsen() {
 
     try {
 
-        btnAbsen.disabled = true;
-        btnAbsen.innerHTML = "⏳ Mengirim...";
+    btnAbsen.disabled = true;
+    btnAbsen.innerHTML = "⏳ Mengirim...";
 
-        const response = await const formData = new FormData();
+    const response = await const formData = new FormData();
 
-formData.append("nama", relawan.value);
-formData.append("divisi", divisi.value);
-formData.append("jenis", jenisAbsen);
-formData.append("statusLokasi", statusLokasi);
-formData.append("jarak", Math.round(jarakMeter));
-formData.append("radius", RADIUS);
-formData.append("foto", fotoBase64);
+    formData.append("nama", relawan.value);
+    formData.append("divisi", divisi.value);
+    formData.append("jenis", jenisAbsen);
+    formData.append("statusLokasi", statusLokasi);
+    formData.append("jarak", Math.round(jarakMeter));
+    formData.append("radius", RADIUS);
+    formData.append("foto", fotoBase64);
 
-fetch(API_URL,{
-    method:"POST",
-    body:formData
-});
+    fetch(API_URL,{
+        method:"POST",
+        body:formData
+    });
 
-        alert("✅ Data berhasil dikirim.");
+    alert("✅ Data berhasil dikirim.");
 
-        btnReset.style.display = "block";
+    btnReset.style.display = "block";
 
-    } catch (err) {
-
+} catch (err) {
         alert("Terjadi kesalahan : " + err);
 
     }
@@ -71,7 +70,7 @@ fetch(API_URL,{
     btnAbsen.innerHTML = "✅ ABSEN SEKARANG";
 
 }
-}
+
 const btnReset = document.getElementById("btnReset");
 
 let stream = null;
