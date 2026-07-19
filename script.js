@@ -48,11 +48,20 @@ async function kirimAbsen() {
         formData.append("foto", fotoBase64);
 
         const response = await fetch(API_URL, {
-            method: "POST",
-            body: formData
-        });
+    method: "POST",
+    body: formData
+});
 
-        alert("✅ Data berhasil dikirim.");
+const hasil = await response.text();
+
+console.log("Status :", response.status);
+console.log("Response :", hasil);
+
+if (!response.ok) {
+    throw new Error("Server mengembalikan status " + response.status);
+}
+
+alert("✅ " + hasil);
 
         btnReset.style.display = "block";
 
