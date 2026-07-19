@@ -18,6 +18,62 @@ const preview = document.getElementById("preview");
 
 const btnSelfie = document.getElementById("btnSelfie");
 const btnAbsen = document.getElementById("btnAbsen");
+btnAbsen.addEventListener("click", kirimAbsen);
+
+async function kirimAbsen() {
+
+    if (!fotoBase64) {
+        alert("Silakan ambil selfie terlebih dahulu.");
+        return;
+    }
+
+    const data = {
+        nama: relawan.value,
+        divisi: divisi.value,
+        jenis: jenisAbsen,
+        statusLokasi: statusLokasi,
+        jarak: Math.round(jarakMeter),
+        radius: RADIUS,
+        foto: fotoBase64
+    };
+
+    try {
+
+        btnAbsen.disabled = true;
+        btnAbsen.innerHTML = "⏳ Mengirim...";
+
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const hasil = await response.json();
+
+        if (hasil.status == "success") {
+
+            alert("✅ Absensi berhasil disimpan.");
+
+            btnReset.style.display = "block";
+
+        } else {
+
+            alert("❌ " + hasil.pesan);
+
+        }
+
+    } catch (err) {
+
+        alert("Terjadi kesalahan : " + err);
+
+    }
+
+    btnAbsen.disabled = false;
+    btnAbsen.innerHTML = "✅ ABSEN SEKARANG";
+
+}
 const btnReset = document.getElementById("btnReset");
 
 let stream = null;
