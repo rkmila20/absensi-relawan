@@ -298,6 +298,7 @@ function ambilLokasi(){
 }
 function suksesLokasi(pos){
 
+     btnAbsen.disabled = false;
     latitude = pos.coords.latitude;
     longitude = pos.coords.longitude;
 
