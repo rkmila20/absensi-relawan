@@ -21,6 +21,10 @@ const btnAbsen = document.getElementById("btnAbsen");
 const btnReset = document.getElementById("btnReset");
 
 let stream = null;
+let latitude = "";
+let longitude = "";
+let statusLokasi = "";
+let jarakMeter = 0;
 let fotoBase64 = "";
 
 let jenisAbsen = "";
@@ -51,7 +55,10 @@ btnPulang.onclick = () => {
 window.onload = () => {
 
     loadDivisi();
+
     bukaKamera();
+
+    ambilLokasi();
 
 };
 
@@ -256,3 +263,94 @@ btnSelfie.onclick = function(){
 setInterval(updateJam,1000);
 
 updateJam();
+
+/************************************************
+ * GPS
+ ************************************************/
+
+// Ganti dengan koordinat SPPG Anda
+const LAT_SPPG = -7.961899530386746;
+const LNG_SPPG = 112.71225527423954;
+
+const RADIUS = 45; // meter
+
+function ambilLokasi(){
+
+    if(!navigator.geolocation){
+
+        document.getElementById("statusLokasi").innerHTML =
+        "GPS tidak didukung";
+
+        return;
+
+    }
+
+   navigator.geolocation.watchPosition(
+    suksesLokasi,
+    gagalLokasi,
+    {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 0
+    }
+);
+
+}
+function suksesLokasi(pos){
+
+    latitude = pos.coords.latitude;
+    longitude = pos.coords.longitude;
+
+    jarakMeter = hitungJarak(
+        LAT_SPPG,
+        LNG_SPPG,
+        latitude,
+        longitude
+    );
+
+    if(jarakMeter <= RADIUS){
+
+        statusLokasi = "🟢 Dalam Radius";
+
+    }else{
+
+        statusLokasi = "🔴 Di Luar Radius";
+
+    }
+
+    document.getElementById("statusLokasi").innerHTML =
+    statusLokasi;
+
+    document.getElementById("jarak").innerHTML =
+    Math.round(jarakMeter) + " Meter";
+
+}
+function gagalLokasi(){
+
+    document.getElementById("statusLokasi").innerHTML =
+    "GPS gagal diperoleh";
+
+}
+function hitungJarak(lat1, lon1, lat2, lon2){
+
+    const R = 6371000;
+
+    const dLat = (lat2-lat1) * Math.PI/180;
+    const dLon = (lon2-lon1) * Math.PI/180;
+
+    const a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+
+    Math.cos(lat1*Math.PI/180) *
+
+    Math.cos(lat2*Math.PI/180) *
+
+    Math.sin(dLon/2) *
+
+    Math.sin(dLon/2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+
+    return R*c;
+
+}
